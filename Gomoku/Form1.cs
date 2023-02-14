@@ -2,8 +2,7 @@ namespace Gomoku
 {
     public partial class Form1 : Form
     {
-        private Board board = new Board();
-        private PieceType nextPieceType = PieceType.BLACK;
+        Game game = new Game();
         public Form1()
         {
             InitializeComponent();
@@ -11,20 +10,16 @@ namespace Gomoku
         }
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            Piece piece = board.PlaceAPiece(e.X, e.Y, nextPieceType);
+            Piece piece = game.PlaceAPiece(e.X, e.Y);
             if (piece != null)
             {
-                this.Controls.Add(piece);
-                if (nextPieceType == PieceType.BLACK)
-                    nextPieceType = PieceType.WHITE;
-                else
-                    nextPieceType = PieceType.BLACK;
+                this.Controls.Add(piece);              
             }
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (board.CanBePlaced(e.X, e.Y))
+            if (game.CanBePlaced(e.X, e.Y))
             {
                 this.Cursor = Cursors.Hand;
             }
