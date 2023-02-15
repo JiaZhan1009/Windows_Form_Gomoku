@@ -28,14 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.SeaShell;
+            this.button1.Font = new System.Drawing.Font("微軟正黑體", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.Location = new System.Drawing.Point(708, 113);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(91, 40);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "reset";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Gomoku.Properties.Resources.board;
-            this.ClientSize = new System.Drawing.Size(760, 748);
+            this.ClientSize = new System.Drawing.Size(822, 748);
+            this.Controls.Add(this.button1);
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "Form1";
             this.Text = "五子棋";
@@ -46,5 +60,7 @@
         }
 
         #endregion
+
+        private Button button1;
     }
 }

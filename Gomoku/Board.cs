@@ -8,7 +8,7 @@ namespace Gomoku
 {
     internal class Board
     {
-        private static readonly int NODE_COUNT = 9;
+        public static readonly int NODE_COUNT = 9;
 
         private static readonly Point NO_MATCH_NODE = new Point(-1, -1);
 
@@ -16,7 +16,19 @@ namespace Gomoku
         private static readonly int NODE_RADIUS = 10;
         private static readonly int NODE_DISTRANCE = 75;
 
-        private Piece[,] pieces = new Piece[9, 9];
+        private Piece[,] pieces = new Piece[NODE_COUNT, NODE_COUNT];
+
+        private Point lastPlacedNode = NO_MATCH_NODE;
+
+        public Point LastPlacedNode { get { return lastPlacedNode; } }
+
+        public PieceType GetPieceType(int nodeIdX, int nodeIdY)
+        {
+            if (pieces[nodeIdX, nodeIdY] == null)
+                return PieceType.NONE;
+            else
+                return pieces[nodeIdX, nodeIdY].GetPieceType();
+        }
 
         public bool CanBePlaced(int x, int y)
         {
@@ -49,8 +61,11 @@ namespace Gomoku
 
             if (type == PieceType.BLACK)
                 pieces[nodeId.X, nodeId.Y] = new BlackPiece(formPos.X, formPos.Y);
-            else
+            else if (type == PieceType.WHITE)
                 pieces[nodeId.X, nodeId.Y] = new WhitePiece(formPos.X, formPos.Y);
+
+            // 記錄最後下棋子的位置
+            lastPlacedNode = nodeId;
 
             return pieces[nodeId.X, nodeId.Y];
         }
@@ -92,6 +107,12 @@ namespace Gomoku
                 return quotient + 1;
             else
                 return -1;
+        }
+
+        public void resetBoard()
+        {
+            pieces = new Piece[NODE_COUNT, NODE_COUNT];
+            lastPlacedNode = NO_MATCH_NODE;
         }
 
     }
